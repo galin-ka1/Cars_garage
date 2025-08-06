@@ -2,14 +2,14 @@ package main.java.app.domain;
 
 import java.util.Objects;
 
-public class Cars {
+public class Car {
    private String regNumber;
    private String model;
    private String  company;
    private double engine;
     private String color;
 
-    public Cars(String regNumber, String model, String company, double engine, String color) {
+    public Car(String regNumber, String model, String company, double engine, String color) {
         this.regNumber = regNumber;
         this.model = model;
         this.company = company;
@@ -59,8 +59,8 @@ public class Cars {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Cars cars)) return false;
-        return Objects.equals(regNumber, cars.regNumber);
+        if (!(o instanceof Car car)) return false;
+        return Objects.equals(regNumber, car.regNumber);
     }
 
     @Override

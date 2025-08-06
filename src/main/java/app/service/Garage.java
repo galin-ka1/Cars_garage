@@ -1,5 +1,7 @@
 package main.java.app.service;
 
+import main.java.app.domain.Car;
+
 public interface Garage {
 
     boolean addCar(Car car);
