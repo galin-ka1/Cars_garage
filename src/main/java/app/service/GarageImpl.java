@@ -11,36 +11,91 @@ public class GarageImpl implements Garage {
 
     @Override
     public boolean addCar(Car car) {
-        return false;
+        if (cars.contains(car)) {
+            return false; // Car already exists
+        }
+        return cars.add(car);
     }
 
     @Override
     public Car removeCar(String regNumber) {
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            if (car.getRegNumber().equals(regNumber)) {
+                cars.remove(i);
+                return car;
+            }
+        }
         return null;
     }
 
     @Override
     public Car findCarsByRegNumber(String regNumber) {
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            if (car.getRegNumber().equals(regNumber)) {
+                return car;
+            }
+        }
         return null;
     }
 
     @Override
     public Car[] findCarsByModel(String model) {
-        return new Car[0];
+        List<Car> foundedCars = new ArrayList<>();
+
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            if (car.getModel().equals(model)) {
+                foundedCars.add(car);
+            }
+        }
+
+        return foundedCars.toArray(new Car[0]);
     }
 
     @Override
     public Car[] findCarsByCompany(String company) {
-        return new Car[0];
+        List<Car> foundedCars = new ArrayList<>();
+
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            if (car.getCompany().equals(company)) {
+                foundedCars.add(car);
+            }
+        }
+        return foundedCars.toArray(new Car[0]);
     }
+
 
     @Override
     public Car[] findCarsByEngine(double min, double max) {
-        return new Car[0];
+        List<Car> foundedCars = new ArrayList<>();
+
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            double engine = car.getEngine();
+
+            if (engine >= min && engine <= max) {
+                foundedCars.add(car);
+            }
+        }
+
+        return foundedCars.toArray(new Car[0]);
     }
 
-    @Override
-    public Car[] findCarByColor(String color) {
-        return new Car[0];
+
+
+@Override
+public Car[] findCarByColor(String color) {
+    List<Car> foundedCars = new ArrayList<>();
+
+    for (int i = 0; i < cars.size(); i++) {
+        Car car = cars.get(i);
+        if (car.getColor().equals(color)) {
+            foundedCars.add(car);
+        }
     }
+    return foundedCars.toArray(new Car[0]);
+}
 }
