@@ -6,15 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GarageImpl implements Garage {
-    private List<Car> cars = new ArrayList<>();
+    private List<Car> cars;
     private int size;
+    private int capacity;
+
+    public GarageImpl(List<Car> cars, int size, int capacity) {
+        this.cars = cars;
+        this.size = size;
+        this.capacity = capacity;
+    }
 
     @Override
     public boolean addCar(Car car) {
         if (cars.contains(car)) {
-            return false; // Car already exists
+            return false;
         }
-        return cars.add(car);
+        cars.add(car);
+        size+=1;
+        return true;
     }
 
     @Override
@@ -23,6 +32,7 @@ public class GarageImpl implements Garage {
             Car car = cars.get(i);
             if (car.getRegNumber().equals(regNumber)) {
                 cars.remove(i);
+                size-=1;
                 return car;
             }
         }
@@ -67,7 +77,6 @@ public class GarageImpl implements Garage {
         return foundedCars.toArray(new Car[0]);
     }
 
-
     @Override
     public Car[] findCarsByEngine(double min, double max) {
         List<Car> foundedCars = new ArrayList<>();
@@ -84,18 +93,16 @@ public class GarageImpl implements Garage {
         return foundedCars.toArray(new Car[0]);
     }
 
+    @Override
+    public Car[] findCarByColor(String color) {
+        List<Car> foundedCars = new ArrayList<>();
 
-
-@Override
-public Car[] findCarByColor(String color) {
-    List<Car> foundedCars = new ArrayList<>();
-
-    for (int i = 0; i < cars.size(); i++) {
-        Car car = cars.get(i);
-        if (car.getColor().equals(color)) {
-            foundedCars.add(car);
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            if (car.getColor().equals(color)) {
+                foundedCars.add(car);
+            }
         }
+        return foundedCars.toArray(new Car[0]);
     }
-    return foundedCars.toArray(new Car[0]);
-}
 }
