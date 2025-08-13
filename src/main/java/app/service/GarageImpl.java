@@ -1,6 +1,8 @@
 package main.java.app.service;
 
 import main.java.app.domain.Car;
+import main.java.app.exceptions.CarAddException;
+import main.java.app.exceptions.CarNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ public class GarageImpl implements Garage {
     @Override
     public boolean addCar(Car car) {
         if (cars.contains(car)) {
-            return false;
+            throw new CarAddException ("This car already exist in this garage");
         }
         cars.add(car);
         size+=1;
@@ -36,7 +38,7 @@ public class GarageImpl implements Garage {
                 return car;
             }
         }
-        return null;
+        throw new CarNotFoundException("The car with " + regNumber + "not found in this garage");
     }
 
     @Override
@@ -47,8 +49,7 @@ public class GarageImpl implements Garage {
                 return car;
             }
         }
-        return null;
-    }
+        throw new CarNotFoundException("The car with " + regNumber + "not found in this garage");}
 
     @Override
     public Car[] findCarsByModel(String model) {
@@ -63,7 +64,6 @@ public class GarageImpl implements Garage {
 
         return foundedCars.toArray(new Car[0]);
     }
-
     @Override
     public Car[] findCarsByCompany(String company) {
         List<Car> foundedCars = new ArrayList<>();
@@ -76,7 +76,6 @@ public class GarageImpl implements Garage {
         }
         return foundedCars.toArray(new Car[0]);
     }
-
     @Override
     public Car[] findCarsByEngine(double min, double max) {
         List<Car> foundedCars = new ArrayList<>();
@@ -92,7 +91,6 @@ public class GarageImpl implements Garage {
 
         return foundedCars.toArray(new Car[0]);
     }
-
     @Override
     public Car[] findCarByColor(String color) {
         List<Car> foundedCars = new ArrayList<>();
