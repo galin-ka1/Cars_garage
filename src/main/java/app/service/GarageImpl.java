@@ -91,7 +91,7 @@ public class GarageImpl implements Garage {
         return foundedCars.toArray(new Car[0]);
     }
     @Override
-    public Car[] findCarByColor(String color) {
+    public Car[] findCarsByColor(String color) {
         List<Car> foundedCars = new ArrayList<>();
 
         for (int i = 0; i < cars.size(); i++) {
