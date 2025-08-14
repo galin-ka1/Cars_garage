@@ -61,7 +61,6 @@ public class GarageImpl implements Garage {
                 foundedCars.add(car);
             }
         }
-
         return foundedCars.toArray(new Car[0]);
     }
     @Override
